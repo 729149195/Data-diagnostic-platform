@@ -19,9 +19,14 @@
             <el-card class="data_exploration" shadow="never">
               实验数据探索
             </el-card>
-            <el-card class="two" shadow="never">
-              <span>可视化配置</span>
-            </el-card>
+            <div class="two">
+              <el-card class="two_left" shadow="never">
+                <span>可视化配置</span>
+              </el-card>
+              <el-card class="two_right" shadow="never">
+                <span>可视化配置</span>
+              </el-card>
+            </div>
           </el-main>
         </el-container>
       </el-container>
@@ -33,10 +38,12 @@
 </script>
 
 <style scoped>
+.el-card__body {
+  padding: 0 !important;
+}
 
-.el-card__body, .el-card__body {
-  padding: 0;
-  margin: 0;
+.el-main {
+  padding: 8px 8px 8px 0 !important;
 }
 
 .all-layout {
@@ -61,7 +68,7 @@
   display: flex;
 }
 
-.aside-content , .main{
+.aside-content, .main {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -73,16 +80,33 @@
   margin-bottom: 5px;
 }
 
-.data_exploration{
+.data_exploration {
   height: 70%;
   margin-bottom: 5px;
 }
 
-.table, .two {
+.table {
   flex-grow: 1;
+}
+
+.two {
+  display: flex;
+  flex-grow: 1;
+  gap: 5px;
+}
+
+.two_left {
+  flex: 1;
+}
+
+.two_right {
+  flex: 2;
 }
 
 .main {
   background-color: #e9e9e9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
