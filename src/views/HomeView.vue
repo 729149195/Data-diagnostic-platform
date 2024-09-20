@@ -32,8 +32,12 @@
               </span>
               <el-input v-model="table_search" placeholder="请输入内容" :prefix-icon="Search" />
               <div style="display: flex; justify-content: center; align-items: center; margin-top: 5px;">
-                <div v-if="test_table_value === true">通道类别表格</div>
-                <div v-if="test_table_value === false">异常类别表格</div>
+                <div v-if="test_table_value === true">
+                  <ChannelType />
+                </div>
+                <div v-if="test_table_value === false">
+                  <ExceptionType />
+                </div>
               </div>
             </el-card>
             <el-card class="table" shadow="never" v-if="selectedButton === 'channel'">
@@ -44,7 +48,7 @@
                 </span>
               </span>
               <div style="display: flex; justify-content: center; align-items: center;">
-                <div>通道类别表格(炮号)</div>
+                <ChannelTypeP />
               </div>
             </el-card>
           </div>
@@ -67,8 +71,8 @@
                 </el-button>
               </span>
               <div style="display: flex; justify-content: center; align-items: center;">
-                <div v-if="test_channel_number === true">多通道单行组件</div>
-                <div v-if="test_channel_number === false">单通道多行组件</div>
+                <div v-if="test_channel_number === true"><MultiChannelSingleRow/></div>
+                <div v-if="test_channel_number === false"><SingleChannelMultiRow/></div>
               </div>
             </el-card>
             <div class="two">
@@ -76,8 +80,8 @@
                 <span style="display: flex; align-items: center; justify-content: space-between;">
                   <span class="title">查询</span>
                   <el-switch v-model="test_search_switch"
-                    style="--el-switch-on-color: #409EFF; --el-switch-off-color: #409EFF" active-text="范围值查询"
-                    inactive-text="绘制查询" />
+                    style="--el-switch-on-color: #409EFF; --el-switch-off-color: #409EFF" active-text="绘制查询"
+                    inactive-text="范围值查询" />
                   <span>
                     <el-button type="primary" :icon="EditPen" />
                     <el-button type="primary"><svg t="1726831993817" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -110,10 +114,13 @@
                     placeholder="幅度" />
                   <el-input v-model="time_end" style="width: 70px; display: block" placeholder="下界" />
                 </span>
-
                 <div style="display: flex; justify-content: center; align-items: center;">
-                  <div v-if="test_search_switch === true">使用范围查询</div>
-                  <div v-if="test_search_switch === false">使用绘制查询</div>
+                  <div v-if="test_search_switch === true">
+                    <SearchSketch :disabled="true" />
+                  </div>
+                  <div v-if="test_search_switch === false" style="pointer-events: none; cursor: not-allowed;">
+                    <SearchSketch :disabled="false" />
+                  </div>
                 </div>
               </el-card>
               <el-card class="two_right" shadow="never">
@@ -130,8 +137,12 @@
                   </el-button>
                 </span>
                 <div style="display: flex; justify-content: center; align-items: center;">
-                  <div v-if="test_result_switch === true">热力图组件</div>
-                  <div v-if="test_result_switch === false">列表组件</div>
+                  <div v-if="test_result_switch === true">
+                    <HeatMap/>
+                  </div>
+                  <div v-if="test_result_switch === false">
+                    <ListResult/>
+                  </div>
                 </div>
               </el-card>
             </div>
@@ -159,14 +170,14 @@
                   <span>统一采样率 <el-input-number v-model="unit_sampling" :precision="2" :step="0.1" :max="10" /></span>
                 </span>
                 <div style="display: flex; justify-content: center; align-items: center;">
-                  通道卡片组件
+                  <ChannelCards/>
                 </div>
               </el-card>
               <el-card class="two_right" shadow="never">
                 <span class="title">通道分析公式</span>
                 <div style="display: flex; justify-content: center; align-items: center; margin-top: 5px;">
-                  <el-input v-model="formulasarea" style="width: 100%; height: 85%;" type="textarea" :autosize="{ minRows: 2, maxRows: 9}"
-                    placeholder="运算公式" />
+                  <el-input v-model="formulasarea" style="width: 100%; height: 85%;" type="textarea"
+                    :autosize="{ minRows: 2, maxRows: 9 }" placeholder="运算公式" />
                 </div>
                 <span style="position: absolute; bottom: 8px; right: 8px;">
                   <el-button type="primary" :icon="FolderChecked">记录公式</el-button>
@@ -176,15 +187,15 @@
             </div>
             <el-card class="data_exploration" shadow="never">
               <span style="display: flex; justify-content: space-between;">
-                  <span class="title">通道分析结果</span>
-                  <span>
-                    <el-button type="primary" :icon="FolderChecked">另存为新通道</el-button>
-                    <el-button type="primary" :icon="Upload">导出</el-button>
-                  </span>
+                <span class="title">通道分析结果</span>
+                <span>
+                  <el-button type="primary" :icon="FolderChecked">另存为新通道</el-button>
+                  <el-button type="primary" :icon="Upload">导出</el-button>
                 </span>
-                <div style="display: flex; justify-content: center; align-items: center;">
-                  通道分析结果组件
-                </div>
+              </span>
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <ChannelCalculationResults/>
+              </div>
             </el-card>
           </el-main>
         </el-container>
@@ -195,7 +206,17 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Search, EditPen, Plus, Minus, Close, FolderChecked, Cpu, Upload } from '@element-plus/icons-vue'
+import { Search, EditPen, FolderChecked, Cpu, Upload } from '@element-plus/icons-vue'
+import ChannelType from '@/components/Channel-Type.vue';
+import ExceptionType from '@/components/Exception-Type.vue';
+import ChannelTypeP from '@/components/Channel-Type-P.vue';
+import SearchSketch from '@/components/Search-Sketch.vue';
+import MultiChannelSingleRow from '@/components/Multi-Channel-Single-Row.vue';
+import SingleChannelMultiRow from '@/components/Single-Channel-Multi-Row.vue';
+import HeatMap from '@/components/Heat-Map.vue';
+import ListResult from '@/components/List-Result.vue';
+import ChannelCards from '@/components/Channel-Cards.vue';
+import ChannelCalculationResults from '@/components/Channel-Calculation-Results.vue';
 
 const test_table_value = ref(true)
 const test_channel_number = ref(true)
