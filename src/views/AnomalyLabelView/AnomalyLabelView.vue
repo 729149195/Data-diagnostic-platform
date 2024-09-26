@@ -138,7 +138,9 @@
                 </span>
                                 <div style="display: flex; justify-content: center; align-items: center;">
                                     <div v-if="test_result_switch === true">
-                                        <HeatMap/>
+                                        <Suspense>
+                                          <HeatMapResult/>
+                                        </Suspense>
                                     </div>
                                     <div v-if="test_result_switch === false">
                                         <ListResult/>

@@ -1,0 +1,35 @@
+[
+    {
+        "channel_type": "AXUV",
+        "channels": {
+            "AXUV001":{
+                "channel": ["./AXUV/data/AXUV001.json", "#999999"],
+                "errors": {
+                    "Detector channel damage": ["./AXUV/error/Detector channel damage.json", "#999999"]
+                }
+            }
+        }
+    },
+    {
+        "channel_type": "Ha",
+        "channels": {
+            "ha001":{
+                "channel": ["./Ha/data/ha001.json","#999999"],
+                "errors":{
+                    "幅值饱和" : ["./Ha/error/幅值饱和.json", "#999999"]
+                }
+            }
+        }
+    },
+    {
+        "channel_type": "HXR",
+        "channels": {
+            "HXR001":{
+                "channel": ["./HXR/data/HXR001.json","#999999"],
+                "errors":{
+                    "幅值饱和" : ["./HXR/error/幅值饱和.json", "#999999"]
+                }
+            }
+        }
+    }
+]
