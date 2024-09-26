@@ -3,7 +3,7 @@ import { createStore } from 'vuex';
 const store = createStore({
   state() {
     return {
-      person:'',
+      person:'zxx',
       authority: 0,
       StructTree: null,
       selectedChannels: [],
@@ -48,14 +48,20 @@ const store = createStore({
       }
       state.anomalies[channelName].push(anomaly);
     },
-    updateAnomaly(state, { channelName, anomalyIndex, anomaly }) {
-      if (state.anomalies[channelName] && state.anomalies[channelName][anomalyIndex]) {
-        state.anomalies[channelName][anomalyIndex] = anomaly;
-      }
-    },
-    deleteAnomaly(state, { channelName, anomalyIndex }) {
+    updateAnomaly(state, { channelName, anomaly }) {
       if (state.anomalies[channelName]) {
-        state.anomalies[channelName].splice(anomalyIndex, 1);
+        const index = state.anomalies[channelName].findIndex(a => a.id === anomaly.id);
+        if (index !== -1) {
+          state.anomalies[channelName][index] = anomaly;
+        }
+      }
+      console.log(state.anomalies)
+    },
+    deleteAnomaly(state, { channelName, anomalyId }) {
+      if (state.anomalies[channelName]) {
+        state.anomalies[channelName] = state.anomalies[channelName].filter(
+          (a) => a.id !== anomalyId
+        );
       }
     }
   },

@@ -214,7 +214,7 @@ const updateChannelTypeCheckbox = (item) => {
 
 .channel-table td {
   padding: 8px;
-  vertical-align: middle;
+  vertical-align: top; /* 上对齐 */
   text-align: center;
 }
 

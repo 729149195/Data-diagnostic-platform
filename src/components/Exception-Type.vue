@@ -227,10 +227,8 @@ const formatError = (name) => {
 
 .channel-table td {
   padding: 8px;
-  vertical-align: middle;
-  /* 默认垂直居中 */
+  vertical-align: top; /* 上对齐 */
   text-align: center;
-  /* 水平居中对齐 */
 }
 
 .channel-type {
