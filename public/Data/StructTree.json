@@ -18,17 +18,17 @@
           "channel": { "path": "/Data/AXUV/data/AXUV001.json", "color": "#228B22" },
           "errors": [
             {
-              "errors_name": "Detector channel damage",
+              "errors_name": "1_Detector channel damage",
               "path": "/Data/AXUV/error/Detector channel damage.json",
               "color": "#DC143C"
             },
             {
-              "errors_name": "Detector channel damage",
+              "errors_name": "2_Detector channel damage",
               "path": "/Data/AXUV/error/Detector channel damage.json",
               "color": "#DC143C"
             },
             {
-              "errors_name": "Detector channel damage",
+              "errors_name": "3_Detector channel damage",
               "path": "/Data/AXUV/error/Detector channel damage.json",
               "color": "#DC143C"
             }

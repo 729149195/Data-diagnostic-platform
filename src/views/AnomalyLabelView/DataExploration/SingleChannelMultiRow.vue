@@ -322,7 +322,7 @@ const drawChart = (
         .attr('x', 10)
         .attr('y', margin.top)
         .attr('text-anchor', 'start')
-        .style('font-size', '12px')
+        .style('font-size', '16px')
         .style('font-weight', 'bold')
         .style('fill', color)
         .text(`${channelType} - ${channelNumber}`);
