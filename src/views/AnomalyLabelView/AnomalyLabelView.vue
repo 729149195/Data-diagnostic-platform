@@ -2,6 +2,18 @@
   <div class="all-layout">
     <el-container>
       <el-header class="header">
+        <el-dropdown trigger="click">
+          <el-avatar :style="avatarStyle" size="medium">{{ avatarText }}</el-avatar>
+          <template #dropdown>
+            <el-dropdown-menu class="user-dropdown">
+              <div class="user-info">
+                <p><span>用户:</span> {{ person }}</p>
+                <p><span>权限: </span>{{ authorityLabel }}</p>
+              </div>
+              <el-dropdown-item divided @click="logout">退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </el-header>
       <el-container>
         <el-aside class="aside">
@@ -58,7 +70,7 @@
             <el-card class="data_exploration" shadow="never">
               <span style="display: flex; align-items: center; justify-content: space-between;">
                 <span class="title">实验数据探索</span>
-                <span>采样率 <el-input-number v-model="sampling" :precision="2" :step="0.1" :max="1" :min="0.01"
+                <span>采样率 <el-input-number v-model="sampling" :precision="2" :step="0.1" :max="1" :min="0.0001"
                     @change="updateSampling" /></span>
                 <span>平滑度 <el-input-number v-model="smoothness" :precision="2" :step="0.1" :max="1" :min="0.0"
                     @change="updateSmoothness" /></span>
@@ -145,7 +157,7 @@
                 </span>
                 <el-scrollbar height="24h" :always="true">
                   <div style="display: flex; justify-content: center; align-items: center;">
-                    <div v-if="test_result_switch === true" style="width: 100%;"> 
+                    <div v-if="test_result_switch === true" style="width: 100%;">
                       <HeatMap />
                     </div>
                     <div v-if="test_result_switch === false" style="width: 100%;">
@@ -214,7 +226,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import { Search, EditPen, FolderChecked, Cpu, Upload } from '@element-plus/icons-vue'
 // 颜色配置及通道选取组件
@@ -236,9 +248,38 @@ import ChannelCards from '@/views/ChannelAnalysisView/ChannelList/ChannelCards.v
 import ChannelCalculationResults from '@/views/ChannelAnalysisView/ChannelCalculation/ChannelCalculationResults.vue';
 
 const store = useStore()
-const sampling = ref(0.3)
+const sampling = ref(0.1)
 const smoothness = ref(0)
 
+// 获取 person 和 authority
+const person = computed(() => store.state.person);
+const authority = computed(() => store.state.authority);
+
+// 根据 person 的第一个字符或汉字生成头像文本
+const avatarText = computed(() => person.value ? person.value.charAt(0) : 'U');
+
+// 权限标签
+const authorityLabel = computed(() => authority.value === 0 ? '普通用户' : '管理员');
+
+// 头像样式
+const avatarStyle = computed(() => {
+  const colors = ['#409EFF', '#67C23A', '#E6A23C', '#F56C6C', '#909399'];
+  // 根据 authority 选择颜色
+  const color = colors[authority.value % colors.length];
+  return {
+    backgroundColor: color,
+    color: '#fff',
+    cursor: 'pointer',
+    border: '2px solid #fff',
+    boxShadow: '0 2px 12px 0 rgba(0, 0, 0, 0.1)',
+  };
+});
+
+// 退出方法
+const logout = () => {
+  console.log('用户已退出');
+  // 在这里处理实际的退出逻辑，比如调用 store 的 logout action
+};
 
 // 实时更新 Vuex 状态的函数
 const updateSampling = (value) => {
@@ -313,9 +354,42 @@ const selectButton = (button) => {
 }
 
 .header {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: #ffffff;
   width: 100vw;
   height: 5vh;
-  background-color: #fff;
+}
+
+.user-dropdown {
+  padding: 10px 0;
+  min-width: 150px;
+}
+
+.user-info {
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.user-info p {
+  color: #303133;
+  line-height: 1.5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.el-dropdown-menu {
+  min-width: 150px;
+}
+
+.el-avatar {
+  transition: all 0.2s;
+}
+
+.el-avatar:hover {
+  transform: scale(1.1);
 }
 
 .aside {

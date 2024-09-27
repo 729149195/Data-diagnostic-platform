@@ -3,11 +3,11 @@ import { createStore } from 'vuex';
 const store = createStore({
   state() {
     return {
-      person:'zxx',
+      person:'玛卡巴卡',
       authority: 0,
       StructTree: null,
       selectedChannels: [],
-      sampling: 0.3,
+      sampling: 0.1,
       smoothness: 0,
       anomalies: {} // { [channelName]: [ { anomaly data } ] }
     }
