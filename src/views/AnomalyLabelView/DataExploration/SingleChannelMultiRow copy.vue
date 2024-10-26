@@ -121,6 +121,9 @@ watch(matchedResults, (newResults) => {
 
 
 const drawHighlightRects = (channel_name, results) => {
+    // 确保传入的 channel_name 是字符串
+    // console.log("Drawing highlights for channel:", channel_name);
+    
     const svg = d3.select(`#chart-${channel_name}`);
     if (!svg.node()) return;
 
@@ -152,6 +155,10 @@ const drawHighlightRects = (channel_name, results) => {
             .datum({ start_X, end_X });
     });
 };
+
+
+
+
 
 
 onMounted(() => {

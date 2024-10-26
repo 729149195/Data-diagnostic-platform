@@ -1,14 +1,14 @@
 <template>
-  <div v-show="selectedChannels.length === 0" >
-    <el-empty :image-size="80" description="请选择通道"/>
-        </div>
+  <div v-show="selectedChannels.length === 0">
+    <el-empty :image-size="80" description="请选择通道" />
+  </div>
   <!-- 热力图组件 -->
   <div v-show="selectedChannels.length != 0">
     <svg id="heatmap"></svg>
 
     <!-- 异常信息对话框 -->
     <el-dialog v-model="showAnomalyDialog" title="异常信息" width="50%" :modal="true" :close-on-click-modal="true"
-       @close="handleDialogClose">
+      @close="handleDialogClose">
       <div v-for="(anomaly, index) in anomalyDialogData" :key="index">
         <div v-for="(value, key) in anomaly" :key="key">
           <p><strong>{{ formatKey(key) }}:</strong> {{ value }}</p>
@@ -140,6 +140,10 @@ async function renderHeatmap(channels) {
 
     // 对于每个错误区间
     for (let idxList of X_value_error) {
+      if (!Array.isArray(idxList) || idxList.length === 0) {
+        continue; // 跳过无效的错误区间数据
+      }
+
       let left = Math.floor((idxList[0] - Domain[0]) / step);
       let right = Math.floor((idxList[idxList.length - 1] - Domain[0]) / step);
       for (let i = left; i <= right; i++) {
@@ -188,7 +192,7 @@ async function renderHeatmap(channels) {
   }
 
   // 设置绘图尺寸
-  let margin = { top: 8, right: 10, bottom: 10, left: 5 };
+  let margin = { top: 8, right: 10, bottom: 25, left: 5 };
   let width = 960 - margin.left - margin.right;
   let rectH = 25; // 固定每个矩形的高度
   let XaxisH = 20;

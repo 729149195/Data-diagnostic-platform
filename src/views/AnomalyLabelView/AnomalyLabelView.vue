@@ -2,8 +2,10 @@
   <div class="all-layout">
     <el-container>
       <el-header class="header">
+        <span>炮号：
+          <el-input v-model="gunnumber" style="width: 70px; margin-right: 8px;" placeholder="炮号" /></span>
         <el-dropdown trigger="click">
-          <el-avatar :style="avatarStyle" size="medium">{{ avatarText }}</el-avatar>
+          <el-avatar :style="avatarStyle" size="default">{{ avatarText }}</el-avatar>
           <template #dropdown>
             <el-dropdown-menu class="user-dropdown">
               <div class="user-info">
@@ -43,14 +45,16 @@
                   inactive-text="异常颜色" />
               </span>
               <el-input v-model="table_search" placeholder="请输入内容" :prefix-icon="Search" />
-              <div>
-                <div v-if="color_table_value === true">
-                  <ChannelType />
+              <el-scrollbar height="82vh" :always="false">
+                <div>
+                  <div v-if="color_table_value === true">
+                    <ChannelType />
+                  </div>
+                  <div v-if="color_table_value === false">
+                    <ExceptionType />
+                  </div>
                 </div>
-                <div v-if="color_table_value === false">
-                  <ExceptionType />
-                </div>
-              </div>
+              </el-scrollbar>
             </el-card>
             <el-card class="table" shadow="never" v-if="selectedButton === 'channel'">
               <span style="display: flex;margin-bottom: 5px; justify-content: space-between;">
@@ -84,7 +88,7 @@
                   </el-icon>
                 </el-button>
               </span>
-              <el-scrollbar height="62vh" :always="true">
+              <el-scrollbar height="62vh" :always="false">
                 <div style="display: flex; justify-content: center; align-items: center;">
                   <div v-if="test_channel_number === true" style="width: 100%;">
                     <SingleChannelMultiRow />
@@ -120,25 +124,9 @@
                     </el-select>
                   </span>
                 </span>
-                <span style="position: absolute; bottom: 8px; right: 8px;">
-                  <el-button type="success" :icon="Search">查询</el-button>
-                </span>
-                <span style="position: absolute; bottom: 8px; left: 8px;">
-                  <el-input v-model="time_begin" style="width: 70px; margin-right: 8px;" placeholder="起始 / s" />
-                  <el-input v-model="time_during" style="width: 70px; margin-right: 8px;" placeholder="时长 / s" />
-                  <el-input v-model="time_end" style="width: 70px" placeholder="终止 / s" />
-                </span>
-                <span style="position: absolute; bottom: 30%; left: 8px;">
-                  <el-input v-model="time_begin" style="width: 70px; display: block; margin-bottom: 8px;"
-                    placeholder="上界" />
-                  <el-input v-model="time_during" style="width: 70px; display: block; margin-bottom: 8px;"
-                    placeholder="幅度" />
-                  <el-input v-model="time_end" style="width: 70px; display: block" placeholder="下界" />
-                </span>
-                <div style="display: flex; justify-content: center; align-items: center;" v-bind="$attrs">
-                  <div v-if="test_search_switch === true">
-                    <!-- 预留SearchSketch的使用问题 -->
-                  </div>
+                <div style="width: 100%; height: 19vh;" v-bind="$attrs">
+                  <!-- <div v-if="test_search_switch === true">
+                  </div> -->
                   <Sketch />
                 </div>
               </el-card>
@@ -155,14 +143,12 @@
                     </el-icon>
                   </el-button>
                 </span>
-                <el-scrollbar height="24h" :always="true">
-                  <div style="display: flex; justify-content: center; align-items: center;">
-                    <div v-if="test_result_switch === true" style="width: 100%;">
-                      <HeatMap />
-                    </div>
-                    <div v-if="test_result_switch === false" style="width: 100%;">
-                      <ListResult />
-                    </div>
+                <el-scrollbar height="22vh" :always="false">
+                  <div v-if="test_result_switch === true" style="width: 100%;">
+                    <HeatMap />
+                  </div>
+                  <div v-if="test_result_switch === false" style="width: 100%;">
+                    <ListResult />
                   </div>
                 </el-scrollbar>
               </el-card>
@@ -248,8 +234,9 @@ import ChannelCards from '@/views/ChannelAnalysisView/ChannelList/ChannelCards.v
 import ChannelCalculationResults from '@/views/ChannelAnalysisView/ChannelCalculation/ChannelCalculationResults.vue';
 
 const store = useStore()
-const sampling = ref(0.1)
+const sampling = ref(0.01)
 const smoothness = ref(0)
+const gunnumber = ref()  //炮号
 
 // 获取 person 和 authority
 const person = computed(() => store.state.person);
@@ -301,9 +288,7 @@ const historyvalue = ref('')
 const table_search = ref('')
 const formulasarea = ref('')
 
-const time_begin = ref()
-const time_during = ref()
-const time_end = ref()
+
 
 const historys = [
   {
@@ -355,7 +340,7 @@ const selectButton = (button) => {
 
 .header {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
   width: 100vw;
@@ -453,16 +438,20 @@ const selectButton = (button) => {
     display: flex;
     flex-grow: 1;
     gap: 5px;
+    position: relative;
+    height: 30%;
   }
 
   .two_left {
     flex: 1.2;
     position: relative;
+    height: 100%;
   }
 
   .two_right {
     flex: 2;
     position: relative;
+    height: 100%;
   }
 
 }
@@ -491,11 +480,13 @@ const selectButton = (button) => {
   .two_left {
     flex: 2;
     position: relative;
+    height: 100%;
   }
 
   .two_right {
     flex: 1;
     position: relative;
+    height: 100%;
   }
 }
 </style>

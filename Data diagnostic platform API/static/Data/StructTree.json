@@ -1,0 +1,115 @@
+[
+    {
+        "channel_type": "AXUV",
+        "channels": [
+            {
+                "channel_name": "AXUV001",
+                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/data/AXUV001.json", "color": "#228B22" },
+                "errors": [
+                    {
+                        "errors_name": "Detector channel damage",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector channel damage.json",
+                        "color": "#DC143C"
+                    }
+                ]
+            },
+            {
+                "channel_name": "AXUV002",
+                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/data/AXUV002.json", "color": "#228B22" },
+                "errors": [
+                    {
+                        "errors_name": "1_Detector channel damage",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector channel damage2.json",
+                        "color": "#DC143C"
+                    },
+                    {
+                        "errors_name": "2_Detector channel damage",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector channel damage2.json",
+                        "color": "#DC143C"
+                    },
+                    {
+                        "errors_name": "3_Detector channel damage",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector channel damage2.json",
+                        "color": "#DC143C"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "channel_type": "Ha",
+        "channels": [
+            {
+                "channel_name": "ha001",
+                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/Ha/data/ha001.json", "color": "#FF6347" },
+                "errors": [
+                    {
+                        "errors_name": "幅值饱和",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/Ha/error/幅值饱和.json",
+                        "color": "#DC143C"
+                    }
+                ]
+            },
+          {
+                "channel_name": "ha002",
+                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/Ha/data/ha001.json", "color": "#FF6347" },
+                "errors": [
+                    {
+                        "errors_name": "幅值饱和",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/Ha/error/幅值饱和.json",
+                        "color": "#DC143C"
+                    }
+                ]
+            },
+          {
+                "channel_name": "ha003",
+                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/Ha/data/ha001.json", "color": "#FF6347" },
+                "errors": [
+                    {
+                        "errors_name": "幅值饱和",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/Ha/error/幅值饱和.json",
+                        "color": "#DC143C"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "channel_type": "HXR",
+        "channels": [
+            {
+                "channel_name": "HXR001",
+                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/HXR/data/HXR001.json", "color": "#1E90FF" },
+                "errors": [
+                    {
+                        "errors_name": "幅值饱和",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/HXR/error/幅值饱和.json",
+                        "color": "#DC143C"
+                    }
+                ]
+            },
+          {
+                "channel_name": "HXR002",
+                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/HXR/data/HXR001.json", "color": "#1E90FF" },
+                "errors": [
+                    {
+                        "errors_name": "幅值饱和",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/HXR/error/幅值饱和.json",
+                        "color": "#DC143C"
+                    }
+                ]
+            },
+          {
+                "channel_name": "HXR003",
+                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/HXR/data/HXR001.json", "color": "#1E90FF" },
+                "errors": [
+                    {
+                        "errors_name": "幅值饱和",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/HXR/error/幅值饱和.json",
+                        "color": "#DC143C"
+                    }
+                ]
+            }
+        ]
+    }
+]
