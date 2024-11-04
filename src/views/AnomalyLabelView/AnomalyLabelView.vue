@@ -44,7 +44,7 @@
                   style="--el-switch-on-color: #409EFF; --el-switch-off-color: #409EFF" active-text="通道颜色"
                   inactive-text="异常颜色" />
               </span>
-              <el-input v-model="table_search" placeholder="请输入内容" :prefix-icon="Search" />
+              
               <el-scrollbar height="82vh" :always="false">
                 <div>
                   <div v-if="color_table_value === true">
@@ -59,13 +59,12 @@
             <el-card class="table" shadow="never" v-if="selectedButton === 'channel'">
               <span style="display: flex;margin-bottom: 5px; justify-content: space-between;">
                 <span class="title">可视化配置</span>
-                <span><el-input v-model="table_search" style="width: 200px;" placeholder="请输入内容"
-                    :prefix-icon="Search" />
-                </span>
               </span>
-              <div style="display: flex; justify-content: center; align-items: center;">
-                <ChannelTypeP />
-              </div>
+              <el-scrollbar height="82vh" :always="false">
+                <div>
+                  <ChannelTypeP />
+                </div>
+              </el-scrollbar>
             </el-card>
           </div>
         </el-aside>
@@ -158,23 +157,14 @@
             <el-card class="operator">
               <span style="display: flex;">
                 <span class="title">运算符列表</span>
-                <span style="display: flex; justify-content: center; align-items: center; width: 85%;">
-                  <el-button type="primary" plain size="large">加</el-button>
-                  <el-button type="primary" plain size="large">减</el-button>
-                  <el-button type="primary" plain size="large">乘</el-button>
-                  <el-button type="primary" plain size="large">除</el-button>
-                  <el-button type="primary" plain size="large">( )</el-button>
-                  <el-button type="primary" plain size="large">傅里叶变换 FFT</el-button>
-                  <el-button type="info" plain size="large">自定义算法</el-button>
-                  <el-button type="success" plain size="large">算法导入</el-button>
-                </span>
+                <ChannelOperator/>
               </span>
             </el-card>
             <div class="two">
               <el-card class="two_left" shadow="never">
                 <span style="display: flex; justify-content: space-between;">
                   <span class="title">待选择通道</span>
-                  <span>统一采样率 <el-input-number v-model="unit_sampling" :precision="2" :step="0.1" :max="10" /></span>
+                  <span>统一频率 <el-input-number v-model="unit_sampling" :precision="2" :step="10" :max="100000" /> KHz</span>
                 </span>
                 <div style="display: flex; justify-content: center; align-items: center;">
                   <ChannelCards />
@@ -182,14 +172,7 @@
               </el-card>
               <el-card class="two_right" shadow="never">
                 <span class="title">通道分析公式</span>
-                <div style="display: flex; justify-content: center; align-items: center; margin-top: 5px;">
-                  <el-input v-model="formulasarea" style="width: 100%; height: 85%;" type="textarea"
-                    :autosize="{ minRows: 2, maxRows: 9 }" placeholder="运算公式" />
-                </div>
-                <span style="position: absolute; bottom: 8px; right: 8px;">
-                  <el-button type="primary" :icon="FolderChecked">记录公式</el-button>
-                  <el-button type="primary" :icon="Cpu">计算</el-button>
-                </span>
+               <ChannelStr/>
               </el-card>
             </div>
             <el-card class="data_exploration" shadow="never">
@@ -214,7 +197,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
-import { Search, EditPen, FolderChecked, Cpu, Upload } from '@element-plus/icons-vue'
+import { EditPen, FolderChecked, Cpu, Upload } from '@element-plus/icons-vue'
 // 颜色配置及通道选取组件
 import ChannelType from '@/components/Channel-Type.vue';
 import ExceptionType from '@/components/Exception-Type.vue';
@@ -231,6 +214,8 @@ import Sketch from '@/views/AnomalyLabelView/Sketch/Sketch.vue';
 
 
 import ChannelCards from '@/views/ChannelAnalysisView/ChannelList/ChannelCards.vue';
+import ChannelOperator from '../ChannelAnalysisView/ChannelOperator/ChannelOperator.vue';
+import ChannelStr from '../ChannelAnalysisView/ChannelStr/ChannelStr.vue';
 import ChannelCalculationResults from '@/views/ChannelAnalysisView/ChannelCalculation/ChannelCalculationResults.vue';
 
 const store = useStore()
@@ -281,7 +266,7 @@ const color_table_value = ref(true)
 const test_channel_number = ref(true)
 const test_result_switch = ref(true)
 const test_search_switch = ref(true)
-const unit_sampling = ref(0.1)
+const unit_sampling = ref(1000)
 const selectedButton = ref('test');
 const templatavalue = ref('')
 const historyvalue = ref('')

@@ -1,3 +1,4 @@
+// store.js
 import { createStore } from "vuex";
 
 const store = createStore({
@@ -9,8 +10,9 @@ const store = createStore({
       selectedChannels: [],
       sampling: 0.01,
       smoothness: 0,
-      anomalies: {}, 
-      matchedResults: [] 
+      anomalies: {},
+      matchedResults: [],
+      clickedChannelNames: "", // 新增字符串变量
     };
   },
   getters: {
@@ -31,7 +33,10 @@ const store = createStore({
     },
     getMatchedResults(state) {
       return state.matchedResults;
-    }
+    },
+    getClickedChannelNames(state) {
+      return state.clickedChannelNames;
+    },
   },
   mutations: {
     setStructTree(state, data) {
@@ -70,9 +75,14 @@ const store = createStore({
         );
       }
     },
-
     setMatchedResults(state, results) {
       state.matchedResults = results;
+    },
+    appendChannelName(state, channelName) {
+      state.clickedChannelNames += channelName;
+    },
+    setClickedChannelNames(state, value) { // 新增 mutation
+      state.clickedChannelNames = value;
     },
   },
   actions: {
@@ -105,8 +115,10 @@ const store = createStore({
     updateMatchedResults({ commit }, results) {
       commit("setMatchedResults", results);
     },
+    appendChannelNameToClicked({ commit }, channelName) {
+      commit("appendChannelName", channelName);
+    },
   },
 });
 
 export default store;
-

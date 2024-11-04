@@ -264,6 +264,21 @@ def submit_data():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
+@app.route('/api/operator-strs', methods=['POST'])
+def process_channel_names():
+    try:
+        data = request.get_json()
+        clickedChannelNames = data.get('clickedChannelNames')
+
+        # 在这里可以添加对channel_names的处理逻辑
+        print("operator-strs:", clickedChannelNames)
+
+        return jsonify({"message": "Channel names processed successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @socketio.on('connect')
 def handle_connect():
     print('Client connected')

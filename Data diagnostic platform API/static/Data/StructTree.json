@@ -7,8 +7,8 @@
                 "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/data/AXUV001.json", "color": "#228B22" },
                 "errors": [
                     {
-                        "errors_name": "Detector channel damage",
-                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector channel damage.json",
+                        "errors_name": "Detector_channel_damage",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector_channel_damage.json",
                         "color": "#DC143C"
                     }
                 ]
@@ -18,18 +18,18 @@
                 "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/data/AXUV002.json", "color": "#228B22" },
                 "errors": [
                     {
-                        "errors_name": "1_Detector channel damage",
-                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector channel damage2.json",
+                        "errors_name": "1_Detector_channel_damage",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector_channel_damage2.json",
                         "color": "#DC143C"
                     },
                     {
-                        "errors_name": "2_Detector channel damage",
-                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector channel damage2.json",
+                        "errors_name": "2_Detector_channel_damage",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector_channel_damage2.json",
                         "color": "#DC143C"
                     },
                     {
-                        "errors_name": "3_Detector channel damage",
-                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector channel damage2.json",
+                        "errors_name": "3_Detector_channel_damage",
+                        "path": "http://localhost:5000/api/channel-data?path=Data/AXUV/error/Detector_channel_damage2.json",
                         "color": "#DC143C"
                     }
                 ]
@@ -90,7 +90,7 @@
             },
           {
                 "channel_name": "HXR002",
-                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/HXR/data/HXR001.json", "color": "#1E90FF" },
+                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/HXR/data/HXR002.json", "color": "#1E90FF" },
                 "errors": [
                     {
                         "errors_name": "幅值饱和",
@@ -101,7 +101,7 @@
             },
           {
                 "channel_name": "HXR003",
-                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/HXR/data/HXR001.json", "color": "#1E90FF" },
+                "channel": { "path": "http://localhost:5000/api/channel-data?path=Data/HXR/data/HXR003.json", "color": "#1E90FF" },
                 "errors": [
                     {
                         "errors_name": "幅值饱和",

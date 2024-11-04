@@ -1,4 +1,5 @@
 <template>
+  <el-input v-model="table_search" placeholder="请输入内容" :prefix-icon="Search" />
   <!-- 全局表头 -->
   <div class="header-row">
     <span>通道类别</span>
@@ -67,9 +68,12 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { Search } from '@element-plus/icons-vue'
+
 
 const store = useStore()
 const data = ref([])
+const table_search = ref()
 
 const predefineColors = ref([
   'rgba(255, 215, 0, 0)',

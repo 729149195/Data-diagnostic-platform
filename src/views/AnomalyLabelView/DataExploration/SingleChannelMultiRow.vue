@@ -229,7 +229,6 @@ watch(smoothnessValue, () => {
 });
 
 // 获取数据并绘制图表
-// 获取数据并绘制图表
 const fetchDataAndDrawChart = async (channel) => {
     try {
         // 确保 channel_name 是一个字符串
